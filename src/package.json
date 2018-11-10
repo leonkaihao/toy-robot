@@ -1,0 +1,20 @@
+{
+  "name": "toy-robot",
+  "version": "1.0.0",
+  "description": "a simulation of a toy robot moving on a square tabletop",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha tests/*.js"
+  },
+  "keywords": [
+    "toy",
+    "robot",
+    "square"
+  ],
+  "author": "kai hao",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0"
+  }
+}
