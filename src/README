@@ -1,0 +1,26 @@
+# File Structure
+app.js ------------ main program, handle console and file inputs loop
+tr_cmd.js --------- an abstract commands middleware for mapping handlers and parsing commmands
+tr_robot.js ------- robot movement logic module
+
+# install
+go into src folder and run:
+$npm install
+
+# Usage
+There are 3 options for running code
+$npm start              --- based on console input
+$node app.js            --- based on console input
+or
+$node app.js [filename] --- based on file input
+
+# Test cases
+Please run
+$mocha tests/*.js
+or
+$npm test
+These test cases cover function of tr_cmd.js and tr_robot.js.
+
+# File input sample
+Please see sample.txt, you can modify and run it by:
+$node app.js sample.txt
