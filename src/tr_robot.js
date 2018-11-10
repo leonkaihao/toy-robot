@@ -1,7 +1,11 @@
-var robot = exports = module.exports = {
+/*
+* Robot
+* @global Robot, for robot movement logic
+*/
+var Robot = exports = module.exports = {
     width: 5,
     height: 5,
-    DIR: {
+    DIR: { //freeze
         NORTH: {name: "NORTH", step: [0, 1]}, 
         SOUTH: {name: "SOUTH", step: [0, -1]}, 
         EAST: {name: "EAST", step: [1, 0]}, 
@@ -11,7 +15,10 @@ var robot = exports = module.exports = {
     posY: -1,
     facing: null,
 
-
+    /**    
+    * reset    
+    * @description reset member variable to default
+    */  
     reset: function() {
         this.width = 5;
         this.height = 5;
@@ -21,6 +28,14 @@ var robot = exports = module.exports = {
         return;
     },
 
+    /**    
+    * place
+    * @description place a robot in a plot with direction
+    * @param {number} x - start from WEST
+    * @param {number} y - start from SOUTH
+    * @param {string} facing - NORTH, SOUTH, WEST or EAST
+    * @returns {boolean} - true if succeed
+    */  
     place: function(x, y , facing) {
         if (x >= this.width || x < 0) {
             return false;
@@ -36,6 +51,13 @@ var robot = exports = module.exports = {
         this.facing = this.DIR[facing];
         return true;
     },
+
+    /**    
+    * move
+    * @description move forward with current direction
+    * @returns {boolean} - false if cannot move or not being placed
+    */  
+
     move: function() {
         if (this.posX < 0 || this.posY < 0) {
             return false;
@@ -49,6 +71,12 @@ var robot = exports = module.exports = {
         this.posY = nextY;
         return true;
     },
+    
+    /**    
+    * turnLeft
+    * @description changing direction without changing position
+    * @returns {boolean} - false if not being placed
+    */  
     turnLeft: function() {
         if (this.posX < 0 || this.posY < 0) {
             return false;
@@ -70,6 +98,12 @@ var robot = exports = module.exports = {
         }
         return true;
     },
+
+    /**    
+    * turnRight
+    * @description changing direction without changing position
+    * @returns {boolean} - false if not being placed
+    */  
     turnRight: function() {
         if (this.posX < 0 || this.posY < 0) {
             return false;
@@ -91,6 +125,12 @@ var robot = exports = module.exports = {
         }
         return true;
     },
+
+    /**    
+    * getPos
+    * @description current coordinate and direction
+    * @returns {object} - [x, y, facing]
+    */  
     getPos: function() {
         if (this.posX < 0 || this.posY < 0) {
             return null;
@@ -99,4 +139,4 @@ var robot = exports = module.exports = {
     }
 };
 
-Object.freeze(robot.DIR);
+Object.freeze(Robot.DIR);

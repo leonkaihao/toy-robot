@@ -1,3 +1,7 @@
+/*
+* CmdMgr
+* @global CmdMgr, for multiple comets monitoring and manipulating
+*/
 var CmdMgr = exports = module.exports = {
     cmdMap: {},
     /**    
@@ -9,11 +13,15 @@ var CmdMgr = exports = module.exports = {
     */  
     addCommand: function(cmd, handler, cb) {
         if ((typeof cmd) !== "string" || cmd.length == 0) {
-            cb({message: "[ERR]addCommand Illegal cmd " + cmd});
+            if (cb) {
+                cb({message: "[ERR]addCommand Illegal cmd " + cmd});
+            }
             return;
         }
         if ((typeof handler) !== "function") {
-            cb({message: "[ERR]addCommand Illegal function " + handler});
+            if (cb) {
+                cb({message: "[ERR]addCommand Illegal function " + handler});
+            }
             return;
         }
         this.cmdMap[cmd] = handler;
@@ -27,19 +35,23 @@ var CmdMgr = exports = module.exports = {
     */  
     parseCommand: function(cmdline, cb) {
         if ((typeof cmdline) !== "string") {
-            cb({message: "[ERR]parseCommand Illegal param " + cmdline});
+            if (cb) {
+                cb({message: "[ERR]parseCommand Illegal param " + cmdline});
+            }
             return;
         }
-
+        //divide command and args
         let cmdarr = cmdline.split(" ");
-        if (!this.cmdMap[cmdarr[0]]) {            
-            cb({message: "[ERR]parseCommand Unknown command " + cmdarr[0]});
+        if (!this.cmdMap[cmdarr[0]]) {
+            if (cb) {
+                cb({message: "[ERR]parseCommand Unknown command " + cmdarr[0]});
+            }            
             return;
         }
-        
+        //split args
         let argarr = [];
         if (cmdarr.length > 1) {
-            cmdarr[1].split(",");
+            argarr = cmdarr[1].split(",");
         }
         this.cmdMap[cmdarr[0]](argarr, cb);
         return;

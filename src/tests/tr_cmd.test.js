@@ -63,11 +63,22 @@ describe("test parseCommand", function() {
         });
         expect(errObj).to.be.not.null;
     });
-    it("normal", function() {
+    it("normal 1", function() {
         let errObj = null;
         cmdMgr.parseCommand("cmd3", function(err) {            
             errObj = err;
         });
         expect(errObj).to.be.null;
+    });
+    it("normal 2 with 3 param", function() {
+        let errObj = null;
+        let argnum = 0;
+        cmdMgr.addCommand("cmd4", function(args, cb){
+            argnum = args.length
+        }, function(err) {});
+        cmdMgr.parseCommand("cmd4 arg1,arg2,arg3", function(err) {            
+            errObj = err;
+        });
+        expect(argnum).equal(3);
     });
 });
